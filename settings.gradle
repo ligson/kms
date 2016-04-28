@@ -1,0 +1,5 @@
+rootProject.name = 'kms'
+include 'kms_api'
+include 'kms_service'
+include 'kms_web'
+
