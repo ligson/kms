@@ -1,0 +1,86 @@
+apply plugin: 'application'
+mainClassName = "org.ca.kms.common.main.Startup"
+applicationDefaultJvmArgs = ["-Dgreeting.language=zh"]
+ext {
+    mysqlVersion = "5.1.29"
+    freemarkerVersion = "2.3.23"
+    dubboVersion = "2.5.3"
+    zkclientVersion = "0.4"
+}
+dependencies {
+    compile project(":kms_api")
+    compile "org.ligson.fw:fw_core:1.0-SNAPSHOT"
+    //compile project(":fw_core")
+    //compile project(":ca_api")
+    //mysql driver
+    compile "mysql:mysql-connector-java:${mysqlVersion}"
+    //freemarker
+    compile "org.freemarker:freemarker:${freemarkerVersion}"
+
+    //dubbo
+    compile("com.alibaba:dubbo:${dubboVersion}") {
+        exclude(group: "org.springframework", module: "spring")
+    }
+    compile("com.101tec:zkclient:${zkclientVersion}") {
+        exclude(group: "log4j")
+    }
+}
+//排除resources文件
+jar {
+    exclude '**/*.properties', '**/*.xml', '**/*.vm', '**/*.txt', "**/META-INF/spring/**", "**/META-INF/mybatis/**"
+}
+task copyConf {
+    doLast {
+        copy {
+            from sourceSets.main.resources.srcDirs
+            into "${buildDir}/conf"
+        }
+    }
+
+}
+
+//自定义zip目录
+installDist {
+    doLast {
+        copy {
+            from "${buildDir}/conf"
+            into "${buildDir}/install/${project.name}/conf"
+        }
+    }
+}
+
+applicationDistribution.from(copyConf) {
+    into ""
+}
+
+//自定义启动脚本
+startScripts {
+    doLast {
+        delete("${buildDir}/scripts/${project.name}")
+        delete("${buildDir}/scripts/${project.name}.bat")
+        copy {
+            from "${projectDir}/src/main/bin"
+            into "${buildDir}/scripts"
+        }
+    }
+}
+
+//打包之前先执行installDist
+distTar {
+    doFirst {
+        installDist.execute()
+    }
+}
+distZip {
+    doFirst {
+        installDist.execute()
+    }
+}
+
+distributions {
+    main {
+        contents {
+            from { "${buildDir}/install/${project.name}" }
+        }
+    }
+}

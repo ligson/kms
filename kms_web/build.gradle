@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":kms_api")
+    //compile project(":fw_facade")
+}

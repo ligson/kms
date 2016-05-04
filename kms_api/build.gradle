@@ -1,0 +1,5 @@
+dependencies {
+    //compile project(":common")
+    //compile project(":fw_facade")
+    compile "org.ligson.fw:fw_facade:1.0-SNAPSHOT"
+}
