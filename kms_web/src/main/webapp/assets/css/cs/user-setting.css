@@ -1,0 +1,70 @@
+.cs-user-setting .tab-content{padding:0 40px;}
+.cs-user-setting .cs-mod .mod-footer{margin-bottom: 30px;}
+.cs-user-setting .cs-mod .cs-mod{padding:30px 0;border-top: 1px solid #e6e6e6;}
+.cs-user-setting .cs-mod .cs-mod:first-child{border-top: none;}
+.cs-user-setting .cs-mod .form-group{margin:15px 0;line-height: 30px;}
+/* 用户设置页面 */
+.cs-user-setting h3{font-size: 16px;color: #333333;}
+.cs-user-setting .form-horizontal .control-group{position: relative;}
+.cs-user-setting .form-horizontal p{margin: 0;}
+.cs-user-setting .form-horizontal p span{margin-left: 10px;}
+.cs-user-setting .upload-attach{position:absolute; left:0; top:7px;width: 70px; height:25px; font-size:100px; opacity:0; filter:alpha(opacity=0);cursor:pointer;}
+/* 基本资料 */
+.cs-user-setting .mod-base{position: relative;}
+.cs-user-setting .mod-base dl{height:auto;line-height: 25px;overflow:hidden;margin:0;padding-bottom: 15px;}
+.cs-user-setting .mod-base dl dt, .cs-user-setting .mod-base dl dd{float: left;line-height: 30px;}
+.cs-user-setting .mod-base dl dt{width: 80px;text-align: right;font-weight: normal;}
+.cs-user-setting .mod-base .introduce input{width: 250px;}
+.cs-user-setting .mod-base dl dd label{min-width: 50px;}
+.cs-user-setting .mod-base dl dd select{width:110px;margin:0;}
+.cs-user-setting .mod-base .time{width: 380px !important;}
+.cs-user-setting .mod-base .side-bar{position: absolute;right: 0;top: 70px;}
+.cs-user-setting .mod-base .side-bar dt{width: 100px;height: 100px;}
+.cs-user-setting .mod-base .side-bar dd{width: 210px;margin-left: 30px;}
+.cs-user-setting .mod-base .side-bar span {margin-left:10px;}
+.cs-user-setting .mod-base .side-bar span .cs-loading{position:relative;top:4px;margin-right: 5px;}
+.cs-user-setting .mod-base .side-bar form{position:relative;opacity: 0;filter:alpha(opacity=0);width: 0;height: 0;}
+.cs-user-setting .mod-base .side-bar form .file-input{position: absolute;left: 0;top: 0;}
+/* 联系方式 */
+.cs-user-setting .mod-contact li{margin-top:20px;min-height: 32px;}
+.cs-user-setting .mod-contact li:first-child{margin-top: 0;}
+.cs-user-setting .mod-contact li input{display:inline;width: 280px;}
+.cs-user-setting .mod-contact label{width: 70px;text-align: right;}
+/* 教育经历, 工作 */
+.cs-user-educate table, .cs-user-work table{border:1px solid #e6e6e6;}
+.cs-user-educate table thead, .cs-user-work table thead{background-color: #fafafa;}
+.cs-user-educate table thead th, .cs-user-work table thead th{border-bottom: 1px solid #e6e6e6;text-align: center;}
+.cs-user-educate table td, .cs-user-work table td{padding:10px !important;border-top: 1px solid #e6e6e6 !important;text-align: center;}
+.cs-user-educate input, .cs-user-work input{width:80%;margin:0 auto;}
+.cs-user-educate select, .cs-user-work select{width: 70px;margin:0;}
+/* 隐私,提醒 */
+.cs-user-setting .mod-setting-privacy .cs-mod dl dt{float: left;width: 180px;font-weight: normal;}
+.cs-user-setting .mod-setting-privacy .cs-mod dl dd{padding-left: 180px;}
+.cs-user-setting .mod-setting-privacy .cs-mod dl dd label{margin:0 30px 20px 0;}
+/* 账号绑定 */
+.cs-user-setting .mod-setting-bind{padding:80px 0 !important;}
+.cs-user-setting .mod-setting-bind ul{text-align: center;}
+.cs-user-setting .mod-setting-bind ul li{display: inline-block;margin:0 65px;}
+.cs-user-setting .mod-setting-bind ul li i{display:block;width:50px;height:50px;margin:0 auto;line-height:50px;border-radius:4px;font-size: 32px;color: #fff;text-align: center;}
+.cs-user-setting .mod-setting-bind ul li p{height: 20px;margin-top: 5px;}
+.cs-user-setting .mod-setting-bind ul li a{margin-top: 15px;}
+.cs-user-setting .mod-setting-bind .icon-weibo{background-color: #ff6161;}
+.cs-user-setting .mod-setting-bind .icon-qq{background-color: #3c88e5;}
+.cs-user-setting .mod-setting-bind .icon-wechat{background-color: #73db42;}
+/* 我的积分 */
+.cs-user-setting-points table{margin:20px 0;font-size:13px;color: #666;}
+.cs-user-setting-points table .info th{background-color: #F5FAFE !important;border-top: none;font-weight: normal;}
+.cs-user-setting-points .table th, .cs-user-setting-points .table td{border-top: 1px solid #DCEDFA;}
+/*响应式*/
+@media (max-width: 640px) {
+    .cs-nav-tabs h2 {position: static;}
+    .cs-user-setting .mod-base .side-bar {position: relative;top: 0;}
+    .cs-user-setting .mod-contact li input ,.cs-user-setting .mod-base .time,.cs-user-setting .mod-base .introduce input{width: 100%!important;}
+}
+@media (max-width: 321px) {
+    .cs-nav-tabs h2 {position: static;}
+    .cs-user-setting .mod-base dl dt {width: auto;}
+    .cs-user-setting .mod-base dl dd select,.cs-user-setting .mod-base .introduce input,.cs-user-setting .mod-base .time,.cs-user-setting .mod-contact li input {width: 100%!important;}
+    .cs-user-setting .mod-base .side-bar {position: relative;top: 0;}
+    .cs-user-setting .mod-body {padding: 30px;}
+}

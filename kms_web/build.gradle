@@ -1,4 +1,50 @@
+apply plugin: "war"
+
+
+ext {
+    freemarkerVersion = "2.3.23"
+    rapidVersion = "4.0.5"
+    jacksonVersion = "2.6.3"
+    commonsFileuploadVersion = "1.2.2"
+    dubboVersion = "2.5.3"
+    zkclientVersion = "0.4"
+}
+
 dependencies {
     compile project(":kms_api")
-    //compile project(":fw_facade")
+    compile "org.ligson.fw:fw_web:1.0-SNAPSHOT"
+
+    //dubbo
+    compile("com.alibaba:dubbo:${dubboVersion}") {
+        exclude(group: "org.springframework", module: "spring")
+    }
+    compile("com.101tec:zkclient:${zkclientVersion}") {
+        exclude(group: "log4j")
+        exclude(group: "junit")
+    }
+
+
+    compile "org.springframework:spring-web:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "org.springframework:spring-context-support:${springVersion}"
+
+    //freemark配置
+    compile "org.freemarker:freemarker:${freemarkerVersion}"
+
+    //rapid
+    compile("com.googlecode.rapid-framework:rapid-core:${rapidVersion}") {
+        exclude(group: "org.apache.cxf")
+    }
+    compile("com.googlecode.rapid-framework:rapid-generator:${rapidVersion}") {
+        exclude(group: "org.freemarker")
+        exclude(group: "com.h2database")
+        exclude(group: "mysql")
+    }
+
+    //jackson
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
+    compile "commons-fileupload:commons-fileupload:${commonsFileuploadVersion}"
+
+    providedCompile "javax.servlet:javax.servlet-api:3.1.0"
 }

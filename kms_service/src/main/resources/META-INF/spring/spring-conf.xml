@@ -16,7 +16,7 @@
                      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="org.ca.ras"/>
+    <context:component-scan base-package="org.ca.kms"/>
     <context:component-scan base-package="org.ligson.fw.core"/>
 
     <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true"/>
@@ -38,7 +38,7 @@
     <import resource="spring-hibernate.xml"/>
 
     <!-- advisor=pointcut+advice -->
-    <bean id="invokeInterceptor" class="org.ca.ras.common.filter.MethodInvoker"/>
+    <bean id="invokeInterceptor" class="org.ca.kms.common.filter.MethodInvoker"/>
     <bean id="methodInvokeAdvisor"
           class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
         <property name="advice" ref="invokeInterceptor"/>
@@ -49,5 +49,8 @@
             </list>
         </property>
     </bean>
+
+    <!--系统初始化-->
+    <bean id="bootstrap" class="org.ca.kms.common.init.BootStrap"/>
 
 </beans>

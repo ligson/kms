@@ -1,13 +1,17 @@
 package org.ca.kms.user.domain;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.ligson.fw.core.entity.BasicEntity;
 
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
 /**
  * Created by ligson on 2016/5/4.
  */
+@Entity
+@Table(name = "user")
 public class UserEntity extends BasicEntity {
     private BigInteger id;
     private String org;
@@ -27,6 +31,10 @@ public class UserEntity extends BasicEntity {
     private Date createTime;
     private Date modifyTime;
 
+    @Id
+    @GeneratedValue(generator = "dr.id")
+    @GenericGenerator(name = "dr.id", strategy = "org.ligson.fw.core.common.idgenerator.DateRandomGenerator")
+    @Column(length = 32, precision = 32, scale = 0)
     public BigInteger getId() {
         return id;
     }
@@ -35,6 +43,7 @@ public class UserEntity extends BasicEntity {
         this.id = id;
     }
 
+    @Column
     public String getOrg() {
         return org;
     }
@@ -43,6 +52,7 @@ public class UserEntity extends BasicEntity {
         this.org = org;
     }
 
+    @Column(name = "org_unit")
     public String getOrgUnit() {
         return orgUnit;
     }
@@ -51,6 +61,7 @@ public class UserEntity extends BasicEntity {
         this.orgUnit = orgUnit;
     }
 
+    @Column
     public String getName() {
         return name;
     }
@@ -59,6 +70,7 @@ public class UserEntity extends BasicEntity {
         this.name = name;
     }
 
+    @Column
     public String getSurname() {
         return surname;
     }
@@ -67,6 +79,7 @@ public class UserEntity extends BasicEntity {
         this.surname = surname;
     }
 
+    @Column
     public String getAddress() {
         return address;
     }
@@ -75,6 +88,7 @@ public class UserEntity extends BasicEntity {
         this.address = address;
     }
 
+    @Column
     public String getPostcode() {
         return postcode;
     }
@@ -83,6 +97,7 @@ public class UserEntity extends BasicEntity {
         this.postcode = postcode;
     }
 
+    @Column
     public String getEmail() {
         return email;
     }
@@ -91,6 +106,7 @@ public class UserEntity extends BasicEntity {
         this.email = email;
     }
 
+    @Column
     public String getMobile() {
         return mobile;
     }
@@ -99,6 +115,7 @@ public class UserEntity extends BasicEntity {
         this.mobile = mobile;
     }
 
+    @Column
     public String getPassword() {
         return password;
     }
@@ -107,6 +124,7 @@ public class UserEntity extends BasicEntity {
         this.password = password;
     }
 
+    @Column
     public Integer getStatus() {
         return status;
     }
@@ -115,6 +133,7 @@ public class UserEntity extends BasicEntity {
         this.status = status;
     }
 
+    @Column
     public String getDescription() {
         return description;
     }
@@ -123,6 +142,7 @@ public class UserEntity extends BasicEntity {
         this.description = description;
     }
 
+    @Column(name = "create_time")
     public Date getCreateTime() {
         return createTime;
     }
@@ -131,6 +151,7 @@ public class UserEntity extends BasicEntity {
         this.createTime = createTime;
     }
 
+    @Column(name = "modify_time")
     public Date getModifyTime() {
         return modifyTime;
     }

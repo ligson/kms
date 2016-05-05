@@ -6,6 +6,7 @@ import org.ca.kms.user.service.UserService;
 import org.ligson.fw.core.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
@@ -16,6 +17,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements User
     @Resource
     private UserDao userDao;
 
+    @PostConstruct
     @Override
     public void initBaseDao() {
         baseDao = userDao;

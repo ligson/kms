@@ -1,1 +1,1 @@
-invokeFilter=org.ca.ras.common.filter.InvokeFilter
+invokeFilter=org.ca.kms.common.filter.InvokeFilter

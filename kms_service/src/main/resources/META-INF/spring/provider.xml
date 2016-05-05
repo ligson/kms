@@ -22,6 +22,12 @@
     <bean id="userApi"
           class="org.ca.kms.user.facade.UserApiImpl"/>
 
+    <!-- 密钥 -->
+    <dubbo:service interface="org.ca.kms.key.api.KeyApi"
+                   ref="keyApi" version="${dubbo.iterface.version}"/>
+    <bean id="keyApi"
+          class="org.ca.kms.key.facade.KeyApiImpl"/>
+
 
 </beans>
 

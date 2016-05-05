@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <bean id="dubboConfig"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:dubbo.properties"/>
+    </bean>
+
+    <dubbo:application name="${dubbo.application.name}"/>
+    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>
+
+    <!-- 账户 -->
+    <dubbo:reference id="userApi"
+                     interface="org.ca.kms.user.api.UserApi"
+                     timeout="${dubbo.consumer.timeout}"
+                     version="${dubbo.iterface.version}"/>
+    <!--直连增加url="${dubbo.registry.address}"-->
+    <dubbo:reference id="certApi"
+                     interface="org.ca.kms.key.api.KeyApi"
+                     timeout="${dubbo.consumer.timeout}"
+                     version="${dubbo.iterface.version}"/>
+</beans>
