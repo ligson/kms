@@ -3,6 +3,7 @@ package org.ca.kms.key.vo;
 import org.ca.kms.key.enums.KeyStatus;
 import org.ca.kms.key.enums.KeyType;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -11,7 +12,7 @@ import java.util.Date;
 /**
  * Created by ligson on 2016/5/5.
  */
-public class Key {
+public class Key implements Serializable {
     private BigInteger id;
     private Integer keyType;
     private Integer keySize;

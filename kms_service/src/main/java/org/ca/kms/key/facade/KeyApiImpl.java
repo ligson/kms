@@ -2,6 +2,7 @@ package org.ca.kms.key.facade;
 
 import org.ca.kms.key.api.KeyApi;
 import org.ca.kms.key.biz.GenKeyBiz;
+import org.ca.kms.key.biz.QueryKeyBiz;
 import org.ca.kms.key.dto.*;
 import org.ligson.fw.core.facade.base.result.Result;
 
@@ -14,6 +15,8 @@ public class KeyApiImpl implements KeyApi {
 
     @Resource
     private GenKeyBiz genKeyBiz;
+    @Resource
+    private QueryKeyBiz queryKeyBiz;
 
     @Override
     public Result<GenKeyResponseDto> genKey(GenKeyRequestDto requestDto) {
@@ -22,7 +25,7 @@ public class KeyApiImpl implements KeyApi {
 
     @Override
     public Result<KeyQueryResponseDto> queryKey(KeyQueryRequestDto requestDto) {
-        return null;
+        return queryKeyBiz.operation(requestDto);
     }
 
     @Override

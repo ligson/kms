@@ -34,6 +34,13 @@ public class KeyController extends BaseController {
     @ResponseBody
     @RequestMapping("/keyList.json")
     public WebResult keyList(KeyQueryRequestDto requestDto) {
+        String pageString = request.getParameter("page");
+        int page = Integer.parseInt(pageString);
+        requestDto.setPageNum(page);
+        String rowString = request.getParameter("rows");
+        int rows = Integer.parseInt(rowString);
+        requestDto.setPageSize(rows);
+
         Result<KeyQueryResponseDto> result = keyApi.queryKey(requestDto);
         if (result.isSuccess()) {
             webResult.put("total", result.getData().getTotalCount());

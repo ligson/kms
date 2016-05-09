@@ -3,7 +3,7 @@
 <script type="text/javascript" src="${assetsPath}js/kms/key/keyMgr.js"></script>
 </@override>
 <@override name="body">
-<table id="tt" title="密钥列表" class="easyui-datagrid" style="height:500px; width: 100%;"
+<table id="tt" class="easyui-datagrid" style="height:500px; width: 100%;"
        data-options="singleSelect:false,fix:true" toolbar="#toolbar" pagination="true" rownumbers="true"
        fitColumns="true"
        url="${basePath}key/keyList.json" iconCls="icon-save" pagination="true">
@@ -36,7 +36,8 @@
             <div class="form-group row">
                 <label class="col-sm-3">生成个数</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control easyui-textbox" name="count" validType="number" required="true">
+                    <input type="text" class="form-control easyui-textbox" name="count" validType="number"
+                           required="true">
                 </div>
             </div>
             <div class="form-group row">
