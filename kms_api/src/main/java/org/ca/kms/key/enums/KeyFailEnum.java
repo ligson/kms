@@ -10,6 +10,8 @@ public class KeyFailEnum extends FailureCodeEnum {
     public static final KeyFailEnum E_PARAM_11001 = new KeyFailEnum("E_PARAM_11001", "密钥类型错误");
     public static final KeyFailEnum E_PARAM_11002 = new KeyFailEnum("E_PARAM_11002", "密钥长度不匹配");
 
+    public static final KeyFailEnum E_BIZ_20001 = new KeyFailEnum("E_BIZ_20001", "密钥不存在");
+
     /**
      * 默认构造
      *

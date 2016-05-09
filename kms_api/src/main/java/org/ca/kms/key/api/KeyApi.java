@@ -14,4 +14,6 @@ public interface KeyApi {
     Result<DestoryKeyResponseDto> destoryKey(DestoryKeyRequestDto requestDto);
 
     Result<ModifyKeyResponseDto> modifyKey(ModifyKeyRequestDto requestDto);
+
+    Result<QueryKeyPairResponseDto> queryKeyPair(QueryKeyPairRequestDto requestDto);
 }

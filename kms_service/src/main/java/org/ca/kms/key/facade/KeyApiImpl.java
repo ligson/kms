@@ -37,4 +37,9 @@ public class KeyApiImpl implements KeyApi {
     public Result<ModifyKeyResponseDto> modifyKey(ModifyKeyRequestDto requestDto) {
         return null;
     }
+
+    @Override
+    public Result<QueryKeyPairResponseDto> queryKeyPair(QueryKeyPairRequestDto requestDto) {
+        return null;
+    }
 }
