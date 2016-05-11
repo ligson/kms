@@ -1,6 +1,7 @@
 package org.ca.kms.key.dto;
 
 import org.ca.kms.key.enums.KeyStatus;
+import org.ligson.fw.core.facade.annotation.Param;
 import org.ligson.fw.core.facade.base.dto.BaseRequestDto;
 
 import java.math.BigInteger;
@@ -10,6 +11,7 @@ import java.util.Date;
  * Created by ligson on 2016/5/5.
  */
 public class ModifyKeyRequestDto extends BaseRequestDto {
+    @Param(name = "id", required = true)
     private BigInteger id;
     /***
      * @see KeyStatus#getCode()

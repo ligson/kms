@@ -2,6 +2,7 @@ package org.ca.kms.key.facade;
 
 import org.ca.kms.key.api.KeyApi;
 import org.ca.kms.key.biz.GenKeyBiz;
+import org.ca.kms.key.biz.ModifyKeyBiz;
 import org.ca.kms.key.biz.QueryKeyBiz;
 import org.ca.kms.key.biz.QueryKeyPairBiz;
 import org.ca.kms.key.dto.*;
@@ -20,6 +21,8 @@ public class KeyApiImpl implements KeyApi {
     private QueryKeyBiz queryKeyBiz;
     @Resource
     private QueryKeyPairBiz queryKeyPairBiz;
+    @Resource
+    private ModifyKeyBiz modifyKeyBiz;
 
     @Override
     public Result<GenKeyResponseDto> genKey(GenKeyRequestDto requestDto) {
@@ -38,7 +41,7 @@ public class KeyApiImpl implements KeyApi {
 
     @Override
     public Result<ModifyKeyResponseDto> modifyKey(ModifyKeyRequestDto requestDto) {
-        return null;
+        return modifyKeyBiz.operation(requestDto);
     }
 
     @Override
