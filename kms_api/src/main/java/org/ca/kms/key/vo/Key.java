@@ -17,8 +17,8 @@ public class Key implements Serializable {
     private Integer keyType;
     private Integer keySize;
     private BigInteger userId;
-    //private PrivateKey privateKey;
-    //private PublicKey publicKey;
+    private String privateKey;
+    private String publicKey;
     /***
      * @see KeyStatus#getCode()
      */
@@ -103,6 +103,22 @@ public class Key implements Serializable {
         this.revokeTime = revokeTime;
     }
 
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
     @Override
     public String toString() {
         return "Key{" +
@@ -110,6 +126,8 @@ public class Key implements Serializable {
                 ", keyType=" + keyType +
                 ", keySize=" + keySize +
                 ", userId=" + userId +
+                ", privateKey='" + privateKey + '\'' +
+                ", publicKey='" + publicKey + '\'' +
                 ", keyStatus=" + keyStatus +
                 ", createTime=" + createTime +
                 ", useTime=" + useTime +
