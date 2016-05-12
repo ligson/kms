@@ -6,6 +6,7 @@ import org.ca.kms.key.dto.ModifyKeyResponseDto;
 import org.ca.kms.key.enums.KeyFailEnum;
 import org.ca.kms.key.service.KeyBufferService;
 import org.ligson.fw.core.common.biz.AbstractBiz;
+import org.ligson.fw.core.common.utils.BeanCopy;
 import org.ligson.fw.core.facade.annotation.Api;
 import org.springframework.stereotype.Component;
 
@@ -44,18 +45,7 @@ public class ModifyKeyBiz extends AbstractBiz<ModifyKeyRequestDto, ModifyKeyResp
     @Override
     public Boolean txnPreProcessing() {
         KeyBufferEntity keyBufferEntity = (KeyBufferEntity) context.getAttr("entity");
-        if (requestDto.getKeyStatus() != null) {
-            keyBufferEntity.setKeyStatus(requestDto.getKeyStatus());
-        }
-        if (requestDto.getUseTime() != null) {
-            keyBufferEntity.setUseTime(requestDto.getUseTime());
-        }
-        if (requestDto.getExpiredTime() != null) {
-            keyBufferEntity.setExpiredTime(requestDto.getExpiredTime());
-        }
-        if (requestDto.getRevokeTime() != null) {
-            keyBufferEntity.setRevokeTime(requestDto.getRevokeTime());
-        }
+        BeanCopy.copyPropertiesIgnoreNull(requestDto, keyBufferEntity);
         return true;
     }
 

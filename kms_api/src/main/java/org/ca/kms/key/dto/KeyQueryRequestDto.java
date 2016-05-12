@@ -11,10 +11,10 @@ import java.util.Date;
  * Created by ligson on 2016/5/5.
  */
 public class KeyQueryRequestDto extends BaseQueryPageRequestDto {
-    private BigInteger id;
+    private String id;
     private Integer keyType;
     private Integer keySize;
-    private BigInteger userId;
+    private String userId;
     //private PrivateKey privateKey;
     //private PublicKey publicKey;
     /***
@@ -29,11 +29,11 @@ public class KeyQueryRequestDto extends BaseQueryPageRequestDto {
     private Date expiredTime;
     private Date revokeTime;
 
-    public BigInteger getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -53,11 +53,11 @@ public class KeyQueryRequestDto extends BaseQueryPageRequestDto {
         this.keySize = keySize;
     }
 
-    public BigInteger getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(BigInteger userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

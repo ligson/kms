@@ -14,9 +14,9 @@ import java.util.Date;
 @Entity
 @Table(name = "enc_cert")
 public class EncCertEntity {
-    private BigInteger id;
-    private BigInteger keyBufferId;
-    private BigInteger userId;
+    private String id;
+    private String keyBufferId;
+    private String userId;
     private String serialNum;
     private String issuer;
     private String subject;
@@ -32,30 +32,30 @@ public class EncCertEntity {
     @Id
     @GeneratedValue(generator = "dr.id")
     @GenericGenerator(name = "dr.id", strategy = "org.ligson.fw.core.common.idgenerator.DateRandomGenerator")
-    @Column(length = 32, precision = 32, scale = 0)
-    public BigInteger getId() {
+    @Column(length = 32)
+    public String getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     @Column(name = "key_buffer_id", length = 32, precision = 32, scale = 0)
-    public BigInteger getKeyBufferId() {
+    public String getKeyBufferId() {
         return keyBufferId;
     }
 
-    public void setKeyBufferId(BigInteger keyBufferId) {
+    public void setKeyBufferId(String keyBufferId) {
         this.keyBufferId = keyBufferId;
     }
 
     @Column(name = "user_id", length = 32, precision = 32, scale = 0)
-    public BigInteger getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(BigInteger userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

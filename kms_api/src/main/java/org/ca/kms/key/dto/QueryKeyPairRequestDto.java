@@ -10,13 +10,13 @@ import java.math.BigInteger;
  */
 public class QueryKeyPairRequestDto extends BaseRequestDto {
     @Param(name = "keyId", required = true)
-    private BigInteger keyId;
+    private String keyId;
 
-    public BigInteger getKeyId() {
+    public String getKeyId() {
         return keyId;
     }
 
-    public void setKeyId(BigInteger keyId) {
+    public void setKeyId(String keyId) {
         this.keyId = keyId;
     }
 }

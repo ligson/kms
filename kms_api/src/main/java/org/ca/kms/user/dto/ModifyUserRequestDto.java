@@ -1,6 +1,5 @@
 package org.ca.kms.user.dto;
 
-import org.ligson.fw.core.facade.annotation.Param;
 import org.ligson.fw.core.facade.base.dto.BaseRequestDto;
 
 import java.math.BigInteger;
@@ -10,7 +9,7 @@ import java.util.Date;
  * Created by ligson on 2016/4/25.
  */
 public class ModifyUserRequestDto extends BaseRequestDto {
-    private BigInteger id;
+    private String id;
     private String org;
     private String orgUnit;
     private String name;
@@ -28,11 +27,11 @@ public class ModifyUserRequestDto extends BaseRequestDto {
     private Date createTime;
     private Date modifyTime;
 
-    public BigInteger getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(String id) {
         this.id = id;
     }
 

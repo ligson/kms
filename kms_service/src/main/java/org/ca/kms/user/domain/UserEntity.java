@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name = "user")
 public class UserEntity extends BasicEntity {
-    private BigInteger id;
+    private String id;
     private String org;
     private String orgUnit;
     private String name;
@@ -34,12 +34,12 @@ public class UserEntity extends BasicEntity {
     @Id
     @GeneratedValue(generator = "dr.id")
     @GenericGenerator(name = "dr.id", strategy = "org.ligson.fw.core.common.idgenerator.DateRandomGenerator")
-    @Column(length = 32, precision = 32, scale = 0)
-    public BigInteger getId() {
+    @Column(length = 32)
+    public String getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -6,7 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.ligson.fw.core.entity.BasicEntity;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -15,8 +14,8 @@ import java.util.Date;
 @Table(name = "key_buffer")
 @Entity
 public class KeyBufferEntity extends BasicEntity {
-    private BigInteger id;
-    private BigInteger userId;
+    private String id;
+    private String userId;
     private String privateKey;
     private String publicKey;
     /***
@@ -36,21 +35,21 @@ public class KeyBufferEntity extends BasicEntity {
     @Id
     @GeneratedValue(generator = "dr.id")
     @GenericGenerator(name = "dr.id", strategy = "org.ligson.fw.core.common.idgenerator.DateRandomGenerator")
-    @Column(length = 32, precision = 32, scale = 0)
-    public BigInteger getId() {
+    @Column(length = 32)
+    public String getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    @Column(length = 32, precision = 32, scale = 0, name = "user_id")
-    public BigInteger getUserId() {
+    @Column(length = 32, name = "user_id")
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(BigInteger userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -10,7 +10,7 @@ import java.math.BigInteger;
  */
 public class GenKeyRequestDto extends BaseRequestDto {
     @Param(name = "用户id", required = true)
-    private BigInteger userId;
+    private String userId;
     @Param(name = "密钥对类型", required = true)
     private Integer keyType;
     @Param(name = "密钥长度", required = true)
@@ -18,11 +18,11 @@ public class GenKeyRequestDto extends BaseRequestDto {
     @Param(name = "密钥个数", required = true, min = 1)
     private Integer count;
 
-    public BigInteger getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(BigInteger userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

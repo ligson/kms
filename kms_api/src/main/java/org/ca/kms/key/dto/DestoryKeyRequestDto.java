@@ -10,13 +10,13 @@ import java.util.List;
  * Created by ligson on 2016/5/5.
  */
 public class DestoryKeyRequestDto extends BaseRequestDto {
-    private List<BigInteger> idList = new ArrayList<>();
+    private List<String> idList = new ArrayList<>();
 
-    public List<BigInteger> getIdList() {
+    public List<String> getIdList() {
         return idList;
     }
 
-    public void setIdList(List<BigInteger> idList) {
+    public void setIdList(List<String> idList) {
         this.idList = idList;
     }
 }

@@ -14,8 +14,8 @@ import java.util.Date;
 @Entity
 @Table(name = "sign_cert")
 public class SignCertEntity {
-    private BigInteger id;
-    private BigInteger userId;
+    private String id;
+    private String userId;
     private String serialNum;
     private String issuer;
     private String subject;
@@ -31,21 +31,21 @@ public class SignCertEntity {
     @Id
     @GeneratedValue(generator = "dr.id")
     @GenericGenerator(name = "dr.id", strategy = "org.ligson.fw.core.common.idgenerator.DateRandomGenerator")
-    @Column(length = 32, precision = 32, scale = 0)
-    public BigInteger getId() {
+    @Column(length = 32)
+    public String getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    @Column(length = 32, precision = 32, scale = 0, name = "user_id")
-    public BigInteger getUserId() {
+    @Column(length = 32, name = "user_id")
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(BigInteger userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
