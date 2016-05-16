@@ -1,6 +1,8 @@
 package org.ca.kms.key.biz;
 
 import org.apache.commons.codec.binary.Base64;
+import org.ca.kms.common.biz.KeyContainerBiz;
+import org.ca.kms.common.model.KeyPairContainer;
 import org.ca.kms.key.domain.KeyBufferEntity;
 import org.ca.kms.key.dto.GenKeyRequestDto;
 import org.ca.kms.key.dto.GenKeyResponseDto;
@@ -30,6 +32,9 @@ public class GenKeyBiz extends AbstractBiz<GenKeyRequestDto, GenKeyResponseDto> 
 
     @Resource
     private KeyBufferService keyBufferService;
+
+    @Resource
+    private KeyContainerBiz keyContainerBiz;
 
     @Override
     public void before() {
@@ -73,6 +78,7 @@ public class GenKeyBiz extends AbstractBiz<GenKeyRequestDto, GenKeyResponseDto> 
     public Boolean txnPreProcessing() {
         KeyPairGenerator generator = (KeyPairGenerator) context.getAttr("generator");
         List<KeyBufferEntity> entities = new ArrayList<>();
+        List<KeyPairContainer> containers = new ArrayList<>();
         for (int i = 0; i < requestDto.getCount(); i++) {
             KeyPair keyPair = generator.generateKeyPair();
             KeyBufferEntity entity = new KeyBufferEntity();
@@ -84,21 +90,31 @@ public class GenKeyBiz extends AbstractBiz<GenKeyRequestDto, GenKeyResponseDto> 
             entity.setPublicKey(Base64.encodeBase64String(keyPair.getPublic().getEncoded()));
             entity.setPrivateKey(Base64.encodeBase64String(keyPair.getPrivate().getEncoded()));
             entities.add(entity);
+            KeyPairContainer container = new KeyPairContainer();
+            container.setPublicKey(keyPair.getPublic());
+            container.setPrivateKey(keyPair.getPrivate());
+            container.setKeySize(requestDto.getKeySize());
+            container.setType(KeyType.getByCode(requestDto.getKeyType()).getMsg());
+            containers.add(container);
         }
         context.setAttr("entities", entities);
+        context.setAttr("containers", containers);
         return true;
     }
 
     @Override
     public Boolean persistence() {
         List<KeyBufferEntity> entities = (List<KeyBufferEntity>) context.getAttr("entities");
-        for (KeyBufferEntity entity : entities) {
+        List<KeyPairContainer> containers = (List<KeyPairContainer>) context.getAttr("containers");
+        for (int i = 0; i < entities.size(); i++) {
+            KeyBufferEntity entity = entities.get(i);
+            KeyPairContainer container = containers.get(i);
+            keyBufferService.add(entity);
             try {
-                keyBufferService.add(entity);
+                keyContainerBiz.storeKey(entity.getId(), container.getPublicKey(), container.getPrivateKey());
             } catch (Exception e) {
                 e.printStackTrace();
-                setFailureResult(FailureCodeEnum.E_PERSIST_40001);
-                return false;
+                keyBufferService.delete(entity);
             }
         }
         responseDto.setSuccess(true);

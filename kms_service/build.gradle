@@ -24,6 +24,7 @@ dependencies {
     compile("com.101tec:zkclient:${zkclientVersion}") {
         exclude(group: "log4j")
     }
+    compile "org.bouncycastle:bctsp-jdk16:1.46"
 }
 //排除resources文件
 jar {

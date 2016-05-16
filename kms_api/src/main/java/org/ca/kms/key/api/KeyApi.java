@@ -16,4 +16,6 @@ public interface KeyApi {
     Result<ModifyKeyResponseDto> modifyKey(ModifyKeyRequestDto requestDto);
 
     Result<QueryKeyPairResponseDto> queryKeyPair(QueryKeyPairRequestDto requestDto);
+
+    Result<GenCsrResponseDto> genCsr(GenCsrRequestDto requestDto);
 }
