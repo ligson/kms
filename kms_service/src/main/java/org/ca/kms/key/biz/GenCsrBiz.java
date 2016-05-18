@@ -10,6 +10,7 @@ import org.ca.kms.key.domain.KeyBufferEntity;
 import org.ca.kms.key.dto.GenCsrRequestDto;
 import org.ca.kms.key.dto.GenCsrResponseDto;
 import org.ca.kms.key.enums.KeyFailEnum;
+import org.ca.kms.key.enums.KeyStatus;
 import org.ca.kms.key.service.KeyBufferService;
 import org.ligson.fw.core.common.biz.AbstractBiz;
 import org.ligson.fw.core.facade.annotation.Api;
@@ -86,6 +87,7 @@ public class GenCsrBiz extends AbstractBiz<GenCsrRequestDto, GenCsrResponseDto> 
         code += csr;
         code += "\n-----END CERTIFICATE REQUEST-----\n";
 
+        keyBufferEntity.setKeyStatus(KeyStatus.INUSE.getCode());
         keyBufferEntity.setUseTime(new Date());
         keyBufferService.update(keyBufferEntity);
         responseDto.setCsr(code);
