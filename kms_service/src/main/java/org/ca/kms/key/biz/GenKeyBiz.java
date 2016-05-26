@@ -2,6 +2,7 @@ package org.ca.kms.key.biz;
 
 import org.apache.commons.codec.binary.Base64;
 import org.ca.kms.common.biz.KeyContainerBiz;
+import org.ca.kms.common.main.Startup;
 import org.ca.kms.common.model.KeyPairContainer;
 import org.ca.kms.key.domain.KeyBufferEntity;
 import org.ca.kms.key.dto.GenKeyRequestDto;
@@ -19,6 +20,7 @@ import javax.annotation.Resource;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +51,7 @@ public class GenKeyBiz extends AbstractBiz<GenKeyRequestDto, GenKeyResponseDto> 
                 return false;
             }
         } else if (requestDto.getKeyType() == KeyType.SM2.getCode()) {
-            if (requestDto.getKeySize() != 512 && requestDto.getKeySize() != 256) {
+            if (requestDto.getKeySize() != 256) {
                 setFailureResult(KeyFailEnum.E_PARAM_11002);
                 return false;
             }
@@ -62,7 +64,11 @@ public class GenKeyBiz extends AbstractBiz<GenKeyRequestDto, GenKeyResponseDto> 
         KeyType keyType = KeyType.getByCode(requestDto.getKeyType());
         KeyPairGenerator generator;
         try {
-            generator = KeyPairGenerator.getInstance(keyType.name());
+            Provider provider = Startup.bcProvider;
+            if (keyType == KeyType.SM2) {
+                provider = Startup.topSMProvider;
+            }
+            generator = KeyPairGenerator.getInstance(keyType.name(), provider);
             generator.initialize(requestDto.getKeySize());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

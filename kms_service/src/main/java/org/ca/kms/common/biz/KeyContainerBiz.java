@@ -91,7 +91,7 @@ public class KeyContainerBiz implements InitializingBean {
             if ("RSA".equals(container.getType())) {
                 signAlg = "SHA1withRSA";
             } else if ("SM2".equals(container.getType())) {
-                signAlg = "SM2withSM3";
+                signAlg = "SM3withSM2";
             }
             PrivateKey privateKey = container.getPrivateKey();
             Signature signature = Signature.getInstance(signAlg);
@@ -112,7 +112,7 @@ public class KeyContainerBiz implements InitializingBean {
             if ("RSA".equals(container.getType())) {
                 signAlg = "SHA1withRSA";
             } else if ("SM2".equals(container.getType())) {
-                signAlg = "SM2withSM3";
+                signAlg = "SM3withSM2";
             }
             Signature signature = Signature.getInstance(signAlg);
             signature.initVerify(certificate.getPublicKey());

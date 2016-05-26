@@ -1,6 +1,7 @@
 package org.ca.kms.common.main;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.ca.ext.security.sm.TopSMProvider;
 
 import java.security.Security;
 
@@ -8,10 +9,12 @@ import java.security.Security;
  * Created by ligson on 2016/5/4.
  */
 public class Startup {
-    static BouncyCastleProvider provider = new BouncyCastleProvider();
+    public static final BouncyCastleProvider bcProvider = new BouncyCastleProvider();
+    public static final TopSMProvider topSMProvider = new TopSMProvider();
 
     static {
-        Security.addProvider(provider);
+        Security.addProvider(bcProvider);
+        Security.addProvider(topSMProvider);
     }
 
     public static void main(String[] args) {
