@@ -2,6 +2,9 @@ package org.ca.kms.common.filter;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.ligson.fw.core.common.biz.AbstractBiz;
 import org.ligson.fw.core.facade.annotation.Api;
 import org.ligson.fw.core.facade.base.dto.BaseRequestDto;
@@ -9,6 +12,8 @@ import org.ligson.fw.core.facade.base.result.Result;
 import org.ligson.fw.core.facade.enums.FailureCodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.lang.annotation.Annotation;
@@ -19,7 +24,9 @@ import java.lang.annotation.Annotation;
 public class MethodInvoker implements MethodInterceptor {
     private static final String PERFIX = "=============>";
     private static Logger logger = LoggerFactory.getLogger(MethodInvoker.class);
-
+    @Autowired
+    @Qualifier("mySessionFactory")
+    private SessionFactory sessionFactory;
 
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
@@ -47,11 +54,27 @@ public class MethodInvoker implements MethodInterceptor {
                         result = Result.getFailureResult(FailureCodeEnum.SERVICE_EXCEPTION.getCode(),
                                 FailureCodeEnum.SERVICE_EXCEPTION.getMsg() + ";异常信息:" + e);
                         //事物回滚
-                        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                        //事物回滚
+                        try {
+                            Session session = sessionFactory.getCurrentSession();
+                            if (session != null) {
+                                session.getTransaction().rollback();
+                            }
+                        } catch (HibernateException e1) {
+                            logger.warn("session transaction exception:{}", e1.getMessage());
+                        }
                     } finally {
                         long end = System.currentTimeMillis();
                         logger.debug("{}调用完成:{}【{}】，耗时{}ms", PERFIX, api.name(), bizClass.getName(), end - start);
                         logger.debug("/\\=/\\=/\\=/\\=/\\=/\\=/\\=/\\=/\\=/\\=/\\=/\\=/\\=/\\=/\\=");
+                        try{
+                            Session session = sessionFactory.getCurrentSession();
+                            if (session != null) {
+                                session.close();
+                            }
+                        }catch(HibernateException e){
+                            logger.warn("session close exception:{}",e.getMessage());
+                        }
                     }
                     return result;
                 }

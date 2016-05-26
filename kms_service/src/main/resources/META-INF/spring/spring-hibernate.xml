@@ -68,19 +68,20 @@
 
     <!--注解型事务扫描 -->
     <!-- <tx:annotation-driven /> -->
-    <tx:advice id="baseServiceAdvice" transaction-manager="transactionManager">
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="find*" read-only="true" propagation="REQUIRED"/>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="persistence" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="operation" propagation="REQUIRED" rollback-for="Exception"/>
         </tx:attributes>
     </tx:advice>
     <aop:config>
-        <aop:pointcut expression="execution(public * org.ca.kms..service.impl..*.*(..))"
-                      id="bussinessService1"/>
-        <aop:advisor advice-ref="baseServiceAdvice" pointcut-ref="bussinessService1"/>
+        <aop:pointcut expression="execution(* org.ca.kms.*.biz.*Biz.*.*(..))"
+                      id="managerMethod"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="managerMethod"/>
     </aop:config>
 
 </beans>
