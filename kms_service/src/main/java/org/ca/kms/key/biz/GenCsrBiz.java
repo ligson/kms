@@ -28,10 +28,7 @@ import javax.security.auth.x500.X500Principal;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.Signature;
+import java.security.*;
 import java.util.Date;
 
 /**
@@ -73,7 +70,22 @@ public class GenCsrBiz extends AbstractBiz<GenCsrRequestDto, GenCsrResponseDto> 
     }
 
     public String genCsr(X500Name subject, PublicKey publicKey, PrivateKey privateKey) {
-
+        if (publicKey.getAlgorithm().equals("RSA")) {
+            X500Principal principal = null;
+            try {
+                principal = new X500Principal(subject.getEncoded());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+            try {
+                PKCS10CertificationRequest request = new PKCS10CertificationRequest("SHA1withRSA", principal, publicKey, null, privateKey);
+                return Base64.encodeBase64String(request.getEncoded());
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
 
         SubjectPublicKeyInfo publicKeyInfo = null;
         try {
